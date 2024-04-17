@@ -5,6 +5,8 @@ import {AppComponent} from './app.component';
 import {BookComponent} from './book/book.component';
 import {BooksComponent} from './books/books.component';
 import {BookService} from "./book.service";
+import {environment} from "../environments/environment";
+import {LocalStorageBookService} from "./local-storage-book.service";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,7 @@ import {BookService} from "./book.service";
   imports: [
     BrowserModule
   ],
-  providers: [{provide: BookService, useClass: BookService}],
+  providers: [{provide: BookService, useClass: environment.production ? LocalStorageBookService : BookService}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
