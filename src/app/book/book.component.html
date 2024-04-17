@@ -1,7 +1,8 @@
 <div>
-  <p>Book title: {{ book?.title }}</p>
-  <p>Book author: {{ book?.author }}</p>
-  <p>Book Pages: {{ book?.pages }}</p>
+  <p (click)="onClick(book?.title)">Book title: {{ book?.title }}</p>
+  <p (click)="onClick(book?.author)">Book author: {{ book?.author }}</p>
+  <p (click)="onClick(book?.pages)">Book Pages: {{ book?.pages }}</p>
   <p>Book description: {{ book?.description }}</p>
   <p>Book year: {{ book?.year }}</p>
 </div>
+<div>Symbol count: {{ symbolCount }}</div>
