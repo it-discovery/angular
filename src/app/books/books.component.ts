@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Book} from "../book";
+import {BookService} from "../book.service";
 
 @Component({
   selector: 'app-books',
@@ -8,22 +9,9 @@ import {Book} from "../book";
 })
 export class BooksComponent {
 
-  books: Book[];
+  books = inject(BookService).getBooks();
 
   constructor() {
-    this.books = [{
-      title: 'JavaScript: The Good Parts',
-      year: 2008,
-      author: 'Douglas Crockford',
-      pages: 172,
-      description: 'This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\'s more reliable, readable, and maintainable'
-    }, {
-      title: 'Mastering TypeScript',
-      year: 2015,
-      author: 'Nathan Rozentals',
-      pages: 364,
-      description: 'Build enterprise-ready, industrial strength web applications using TypeScript and leading JavaScript frameworks'
-    }];
   }
 
   isJavaScript(book: Book): boolean {
