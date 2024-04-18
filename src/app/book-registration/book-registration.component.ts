@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Book} from "../book";
 import {BookService} from "../book.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-book-registration',
@@ -12,8 +12,9 @@ export class BookRegistrationComponent {
   constructor(private bookService: BookService) {
   }
 
-  save(book: Book): void {
-    this.bookService.save(book);
+  save(form: NgForm): void {
+    this.bookService.save(form.value);
+    form.reset();
   }
 
 }
