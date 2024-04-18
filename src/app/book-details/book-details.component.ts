@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {Book} from "../book";
 
 @Component({
@@ -9,10 +9,10 @@ import {Book} from "../book";
 })
 export class BookDetailsComponent {
 
-  @Input({required: true})
-  book: Book | undefined;
+  // @Input({required: true})
+  // book: Book | undefined;
 
-  // book = input.required<Book | undefined>;
+  book = input.required<Book | undefined>();
 
   isJavaScript(book: Book | undefined): boolean {
     if (book) {
