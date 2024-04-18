@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, SecurityContext} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Book} from "../book";
 import {BookForm} from "../book-form";
@@ -21,7 +21,7 @@ export class BookRegistrationComponent {
       title: formBuilder.control('', [Validators.required,
         Validators.minLength(4), Validators.maxLength(32)]),
       author: formBuilder.control('', [Validators.required,
-        Validators.minLength(4), Validators.maxLength(32)]),
+        Validators.minLength(4), Validators.maxLength(32), this.validateAuthor]),
     })
   }
 
@@ -35,6 +35,16 @@ export class BookRegistrationComponent {
 
   isValid(controlName: string): boolean {
     return this.bookForm.get(controlName)!.dirty && !this.bookForm.get(controlName)?.valid;
+  }
+
+  validateAuthor(control: FormControl): ValidationErrors | null {
+    if (!control.value) {
+      return null;
+    }
+    if (control.value.toString().split(' ').length >= 2) {
+      return null;
+    }
+    return {authorTooSmall: true};
   }
 
   // save(form: NgForm): void {
