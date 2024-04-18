@@ -28,4 +28,7 @@ export class BookService {
     return this.books;
   }
 
+  save(book: Book) {
+    this.books.push(book);
+  }
 }

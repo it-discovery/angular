@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">Book details</div>
+  <div class="card-body">
+    <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" name="title" placeholder="Enter book title"
+               required minlength="4" maxlength="32" #title=ngModel>
+      </div>
+      @if (title.dirty && !title.valid) {
+        <div class="alert alert-danger">Please, enter book title</div>
+      }
+      <div class="form-group">
+        <label>Author</label>
+        <input type="text" class="form-control" name="author" placeholder="Enter book author"
+               required minlength="4" maxlength="32" #author=ngModel>
+      </div>
+      @if (author.dirty && !author.valid) {
+        <div class="alert alert-danger">Please, enter book author</div>
+      }
+      <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Save</button>
+    </form>
+  </div>
+</div>
