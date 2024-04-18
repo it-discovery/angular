@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {Book} from "../book";
 
 @Component({
@@ -9,9 +9,9 @@ import {Book} from "../book";
 export class BookComponent implements OnInit {
   book: Book;
 
-  symbolCount: number | undefined;
+  symbolCount = signal<number | undefined>(0);
 
-  searchText?: string;
+  searchText = signal('');
 
   constructor() {
     this.book = {
@@ -21,7 +21,7 @@ export class BookComponent implements OnInit {
   }
 
   onClick(value: string | number | undefined): void {
-    this.symbolCount = value?.toString().length;
+    this.symbolCount.set(value?.toString().length);
   }
 
   ngOnInit(): void {
