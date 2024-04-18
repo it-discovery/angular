@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, SecurityContext} from '@angular/core';
 import {BookService} from "../book.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Book} from "../book";
 
 @Component({
   selector: 'app-book-registration',
@@ -11,7 +13,8 @@ export class BookRegistrationComponent {
 
   bookForm: FormGroup;
 
-  constructor(private bookService: BookService, formBuilder: FormBuilder) {
+  constructor(private bookService: BookService, formBuilder: FormBuilder,
+              private domSanitizer: DomSanitizer) {
     this.bookForm = formBuilder.group({
       title: formBuilder.control('', [Validators.required,
         Validators.minLength(4), Validators.maxLength(32)]),
@@ -21,7 +24,9 @@ export class BookRegistrationComponent {
   }
 
   save(): void {
-    this.bookService.save(this.bookForm.value);
+    const book = this.bookForm.value as Book;
+    book.title = this.domSanitizer.sanitize(SecurityContext.HTML, book.title || '') as string;
+    this.bookService.save(book);
     this.bookForm.reset();
   }
 
