@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Output, SecurityContext} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Book} from "../book";
 import {BookForm} from "../book-form";
+import {map, Observable} from "rxjs";
+import {BookService} from "../book.service";
 
 @Component({
   selector: 'app-book-registration',
@@ -16,10 +18,12 @@ export class BookRegistrationComponent {
   @Output()
   bookSaved = new EventEmitter<Book>();
 
-  constructor(formBuilder: FormBuilder, private domSanitizer: DomSanitizer) {
+  constructor(formBuilder: FormBuilder, private domSanitizer: DomSanitizer,
+              private bookService: BookService) {
     this.bookForm = formBuilder.group({
       title: formBuilder.control('', [Validators.required,
-        Validators.minLength(4), Validators.maxLength(32)]),
+          Validators.minLength(4), Validators.maxLength(32)],
+        [this.validateTitleExistence.bind(this)]),
       author: formBuilder.control('', [Validators.required,
         Validators.minLength(4), Validators.maxLength(32), this.validateAuthor]),
     })
@@ -45,6 +49,18 @@ export class BookRegistrationComponent {
       return null;
     }
     return {authorTooSmall: true};
+  }
+
+  validateTitleExistence(control: AbstractControl): Observable<ValidationErrors | null> {
+    return this.bookService.bookExists(control.value)
+      .pipe(map(result => {
+          if (!result) {
+            return null;
+          } else {
+            return {titleExists: true};
+          }
+        }
+      ));
   }
 
   // save(form: NgForm): void {

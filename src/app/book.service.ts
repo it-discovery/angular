@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Book} from "./book";
-import {delay, Observable, of} from "rxjs";
+import {delay, map, Observable, of} from "rxjs";
 
 @Injectable()
 export class BookService {
@@ -31,5 +31,10 @@ export class BookService {
 
   save(book: Book) {
     this.books.push(book);
+  }
+
+  bookExists(title: string): Observable<boolean> {
+    return of(this.books).pipe(delay(100)).pipe(map(values => values.map(book => book.title)
+      .includes(title)))
   }
 }
