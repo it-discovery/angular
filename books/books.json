@@ -1,0 +1,16 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "TypeScript",
+      "author": "John Bush",
+      "pages": 200
+    },
+    {
+      "id": 2,
+      "title": "Angular",
+      "author": "Kevin Smith",
+      "pages": 300
+    }
+  ]
+}

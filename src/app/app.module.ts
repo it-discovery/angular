@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BookRegistrationComponent} from './book-registration/book-registration.component';
 import {HighlightDirective} from "./highlight.directive";
 import {BookDetailsComponent} from './book-details/book-details.component';
+import {HttpClientModule} from "@angular/common/http";
+import {HttpBasedBookServiceService} from "./http-based-book-service.service";
 
 @NgModule({
   declarations: [
@@ -26,9 +28,13 @@ import {BookDetailsComponent} from './book-details/book-details.component';
     QuotePipe,
     FormsModule,
     ReactiveFormsModule,
-    HighlightDirective
+    HighlightDirective,
+    HttpClientModule
   ],
-  providers: [{provide: BookService, useClass: environment.production ? LocalStorageBookService : BookService}],
+  providers: [{
+    provide: BookService,
+    useClass: environment.production ? LocalStorageBookService : HttpBasedBookServiceService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
