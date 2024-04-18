@@ -1,5 +1,4 @@
 import {Component, inject} from '@angular/core';
-import {Book} from "../book";
 import {BookService} from "../book.service";
 
 @Component({
@@ -14,7 +13,4 @@ export class BooksComponent {
   constructor() {
   }
 
-  isJavaScript(book: Book): boolean {
-    return book.title.indexOf('JavaScript') >= 0;
-  }
 }

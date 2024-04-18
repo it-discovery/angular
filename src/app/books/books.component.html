@@ -1,13 +1,6 @@
 <div>
   @for (book of books; track book.title) {
-    <div [ngClass]="{javascript: isJavaScript(book) }">
-      <h4>{{ book.title | quote }}</h4>
-      <div>Author: {{ book.author }}</div>
-      <div>Year: {{ book.year }}</div>
-      <div>Pages: {{ book.pages }}</div>
-      <div>Description: {{ book.description }}</div>
-      <div>Price: {{ book.price | currency: 'EUR': 'symbol' }}</div>
-    </div>
+    <app-book-details [book]="book"></app-book-details>
   }
   <div>
     Please, enter your option:

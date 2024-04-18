@@ -11,13 +11,15 @@ import {QuotePipe} from "./quote.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BookRegistrationComponent} from './book-registration/book-registration.component';
 import {HighlightDirective} from "./highlight.directive";
+import {BookDetailsComponent} from './book-details/book-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     BooksComponent,
-    BookRegistrationComponent
+    BookRegistrationComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
