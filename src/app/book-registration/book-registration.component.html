@@ -5,7 +5,7 @@
       <div class="form-group">
         <label>Title</label>
         <input type="text" class="form-control" name="title" placeholder="Enter book title"
-               required minlength="4" maxlength="32" #title=ngModel>
+               required minlength="4" maxlength="32" ngModel #title=ngModel>
       </div>
       @if (title.dirty && !title.valid) {
         <div class="alert alert-danger">Please, enter book title</div>
@@ -13,7 +13,7 @@
       <div class="form-group">
         <label>Author</label>
         <input type="text" class="form-control" name="author" placeholder="Enter book author"
-               required minlength="4" maxlength="32" #author=ngModel>
+               required minlength="4" maxlength="32" ngModel #author=ngModel>
       </div>
       @if (author.dirty && !author.valid) {
         <div class="alert alert-danger">Please, enter book author</div>
