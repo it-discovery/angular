@@ -11,6 +11,8 @@ export class BookComponent implements OnInit {
 
   symbolCount: number | undefined;
 
+  searchText?: string;
+
   constructor() {
     this.book = {
       title: 'Angular 17',

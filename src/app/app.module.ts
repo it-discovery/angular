@@ -10,6 +10,7 @@ import {LocalStorageBookService} from "./local-storage-book.service";
 import {QuotePipe} from "./quote.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BookRegistrationComponent} from './book-registration/book-registration.component';
+import {HighlightDirective} from "./highlight.directive";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {BookRegistrationComponent} from './book-registration/book-registration.c
     BrowserModule,
     QuotePipe,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighlightDirective
   ],
   providers: [{provide: BookService, useClass: environment.production ? LocalStorageBookService : BookService}],
   bootstrap: [AppComponent]
