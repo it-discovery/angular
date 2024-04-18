@@ -7,6 +7,7 @@ import {BooksComponent} from './books/books.component';
 import {BookService} from "./book.service";
 import {environment} from "../environments/environment";
 import {LocalStorageBookService} from "./local-storage-book.service";
+import {QuotePipe} from "./quote.pipe";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {LocalStorageBookService} from "./local-storage-book.service";
     BooksComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    QuotePipe
   ],
   providers: [{provide: BookService, useClass: environment.production ? LocalStorageBookService : BookService}],
   bootstrap: [AppComponent]
