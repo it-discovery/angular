@@ -12,7 +12,7 @@ export class BooksComponent {
   books: Book[] = [];
 
   constructor(private bookService: BookService) {
-    this.books = this.bookService.getBooks();
+    this.bookService.getBooks().subscribe(value => this.books = value);
   }
 
   saveBook(book: Book): void {

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Book} from "./book";
+import {delay, Observable, of} from "rxjs";
 
 @Injectable()
 export class BookService {
@@ -24,8 +25,8 @@ export class BookService {
     }];
   }
 
-  getBooks(): Book[] {
-    return this.books;
+  getBooks(): Observable<Book[]> {
+    return of(this.books).pipe(delay(1000));
   }
 
   save(book: Book) {
