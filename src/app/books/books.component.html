@@ -2,6 +2,7 @@
   @for (book of books; track book.title) {
     <app-book-details [book]="book"></app-book-details>
   }
+  <app-book-registration (bookSaved)="saveBook($event)"></app-book-registration>
   <div>
     Please, enter your option:
     <input type="text">

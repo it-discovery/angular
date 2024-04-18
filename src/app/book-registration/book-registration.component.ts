@@ -1,5 +1,4 @@
-import {Component, SecurityContext} from '@angular/core';
-import {BookService} from "../book.service";
+import {Component, EventEmitter, Output, SecurityContext} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Book} from "../book";
@@ -14,8 +13,10 @@ export class BookRegistrationComponent {
 
   bookForm: FormGroup<BookForm>;
 
-  constructor(private bookService: BookService, formBuilder: FormBuilder,
-              private domSanitizer: DomSanitizer) {
+  @Output()
+  bookSaved = new EventEmitter<Book>();
+
+  constructor(formBuilder: FormBuilder, private domSanitizer: DomSanitizer) {
     this.bookForm = formBuilder.group({
       title: formBuilder.control('', [Validators.required,
         Validators.minLength(4), Validators.maxLength(32)]),
@@ -27,7 +28,8 @@ export class BookRegistrationComponent {
   save(): void {
     const book = this.bookForm.value as Book;
     book.title = this.domSanitizer.sanitize(SecurityContext.HTML, book.title || '') as string;
-    this.bookService.save(book);
+
+    this.bookSaved.emit(book);
     this.bookForm.reset();
   }
 

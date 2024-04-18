@@ -1,5 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {BookService} from "../book.service";
+import {Book} from "../book";
 
 @Component({
   selector: 'app-books',
@@ -8,9 +9,13 @@ import {BookService} from "../book.service";
 })
 export class BooksComponent {
 
-  books = inject(BookService).getBooks();
+  books: Book[] = [];
 
-  constructor() {
+  constructor(private bookService: BookService) {
+    this.books = this.bookService.getBooks();
   }
 
+  saveBook(book: Book): void {
+    this.bookService.save(book);
+  }
 }
