@@ -8,7 +8,7 @@ import {BookService} from "./book.service";
 import {environment} from "../environments/environment";
 import {LocalStorageBookService} from "./local-storage-book.service";
 import {QuotePipe} from "./quote.pipe";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BookRegistrationComponent} from './book-registration/book-registration.component';
 
 @NgModule({
@@ -21,7 +21,8 @@ import {BookRegistrationComponent} from './book-registration/book-registration.c
   imports: [
     BrowserModule,
     QuotePipe,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{provide: BookService, useClass: environment.production ? LocalStorageBookService : BookService}],
   bootstrap: [AppComponent]
