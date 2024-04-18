@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Book} from "../book";
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrl: './book-details.component.css'
+  styleUrl: './book-details.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookDetailsComponent {
 
